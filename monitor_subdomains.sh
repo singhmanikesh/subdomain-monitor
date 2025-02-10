@@ -30,8 +30,8 @@ touch subdomains.txt # Ensure the file exists
 if ! diff -q subdomains.txt live_subdomains.txt > /dev/null; then
     echo "[!] New subdomains found!"
     cp live_subdomains.txt subdomains.txt
-    echo "::set-output name=changed::true"
+    echo "changed=true" >> $GITHUB_ENV
 else
     echo "[✓] No new subdomains detected."
-    echo "::set-output name=changed::false"
+    echo "changed=false" >> $GITHUB_ENV
 fi
