@@ -21,10 +21,11 @@ jobs:
           export PATH=$PATH:$(go env GOPATH)/bin
 
       - name: Run Subdomain Monitoring Script
+        id: monitor  # Assign an ID for later use
         run: bash monitor_subdomains.sh
 
       - name: Commit and Push Changes
-        if: steps.monitor.outputs.changed == 'true'
+        if: env.changed == 'true'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
@@ -33,7 +34,7 @@ jobs:
           git push
 
       - name: Create GitHub Issue if new subdomains are found
-        if: steps.monitor.outputs.changed == 'true'
+        if: env.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
