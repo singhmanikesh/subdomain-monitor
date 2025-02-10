@@ -2,7 +2,7 @@ name: Subdomain Enumeration Monitor
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Runs every hour
+    - cron: "0 */5 * * *"  # Runs every 5 hours
   workflow_dispatch:  # Allows manual execution
 
 jobs:
